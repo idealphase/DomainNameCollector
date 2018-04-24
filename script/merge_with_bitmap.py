@@ -98,4 +98,3 @@ with open("formatted_result_from_4_generator.txt","w") as f:
 tf = datetime.datetime.now()
 print "[+] Elapsed time",tf-ts
 print "[+] Complete all task !"
-'''
