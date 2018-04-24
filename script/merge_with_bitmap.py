@@ -1,21 +1,18 @@
 import datetime
 dnstwist = list()
-with open("filtered_result_from_4_generator.txt") as f:
+with open("../dnstwist/result/filtered_result_from_dnstwist.txt") as f:
     dnstwist = f.read().split('\n')[:-1]
 print "[+] Read dnstwist completely"
-
 urlcrazy = list()
-with open("filtered_result_from_urlcrazy.txt") as f:
+with open("../urlcrazy/result/filtered_result_from_urlcrazy.txt") as f:
     urlcrazy = f.read().split('\n')[:-1]
 print "[+] Read urlcrazy completely"
-
 typofinder = list()
-with open("formatted_result_from_typofinder.txt") as f:
+with open("../typofinder/TypoMagic/result/formatted_result_from_typofinder.txt") as f:
     typofinder = f.read().split('\n')[:-1]
 print "[+] Read typofinder completely"
-
 typogenerator = list()
-with open("formatted_result_from_typogenerator.txt") as f:
+with open("../typogenerator/cmd/typogen/result/formatted_result_from_typogenerator.txt") as f:
     typogenerator = f.read().split('\n')[:-1]
 print "[+] Read typogenerator completely"
 
@@ -101,3 +98,4 @@ with open("formatted_result_from_4_generator.txt","w") as f:
 tf = datetime.datetime.now()
 print "[+] Elapsed time",tf-ts
 print "[+] Complete all task !"
+'''
