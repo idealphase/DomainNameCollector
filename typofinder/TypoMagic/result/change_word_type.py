@@ -12,7 +12,7 @@ with open("temp.txt","w") as f:
                 temp2 = "Bitsquatting "+temp[1]+" "+temp[2]+"\n"
             elif temp[0] == "miskeyed_addition":
                 temp2 = "Insertion "+temp[1]+" "+temp[2]+"\n"
-            elif temp[0] == "miskeyed,replace_i_l_1_o_0":
+            elif temp[0] == "miskeyed" or temp[0] == "replace_i_l_1_o_0":
                 temp2 = "Replacement "+temp[1]+" "+temp[2]+"\n"
             elif temp[0] == "ings_and_plurals" or temp[0] =="ings_and_plurals_then_replace_i_l_1_o_0":
                 temp2 = "Addition "+temp[1]+" "+temp[2]+"\n"
@@ -24,6 +24,8 @@ with open("temp.txt","w") as f:
                 temp2 = "Transposition "+temp[1]+" "+temp[2]+"\n"
             elif temp[0] == "duplicate_character":
                 temp2 = "Repetition "+temp[1]+" "+temp[2]+"\n"
+            elif temp[0] == "miskeyed_sequence":
+                temp2 = "Various "+temp[1]+" "+temp[2]+"\n"
             else:
                 temp2 = line+'\n'
         except:
