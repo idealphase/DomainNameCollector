@@ -1,0 +1,70 @@
+package main
+
+import (
+	"fmt"
+	"log"
+	"os"
+
+	"golang.org/x/net/idna"
+
+	"github.com/Zenithar/typogenerator"
+	"github.com/Zenithar/typogenerator/mapping"
+	"github.com/Zenithar/typogenerator/strategy"
+
+	"github.com/hduplooy/gocsv"
+	"github.com/namsral/flag"
+)
+
+var (
+	input           = flag.String("s", "zenithar", "Defines string to alternate")
+	permutationOnly = flag.Bool("p", false, "Display permutted domain only")
+)
+
+func init() {
+	flag.Parse()
+}
+
+func main() {
+	all := []strategy.Strategy{
+		strategy.Addition,
+		strategy.BitSquatting,
+		strategy.Homoglyph,
+		strategy.Omission,
+		strategy.Repetition,
+		strategy.Transposition,
+		strategy.Prefix,
+		strategy.Hyphenation,
+		strategy.SubDomain,
+		strategy.VowelSwap,
+		strategy.Replace(mapping.English),
+		strategy.DoubleHit(mapping.English),
+	}
+
+	results, err := typogenerator.Fuzz(*input, all...)
+	if err != nil {
+		log.Fatal("Unable to generate domains.")
+	}
+
+	if !*permutationOnly {
+		writer := gocsv.NewWriter(os.Stdout)
+		writer.QuoteFields = true
+		defer writer.Flush()
+
+		// Write headers
+		//writer.Write([]string{"strategy", "domain", "permunation", "idna"})
+
+		for _, r := range results {
+			for _, p := range r.Permutations {
+				puny, _ := idna.ToASCII(p)
+				writer.Write([]string{r.StrategyName, r.Domain, p, puny})
+			}
+		}
+	} else {
+		for _, r := range results {
+			for _, p := range r.Permutations {
+				fmt.Println(p)
+			}
+		}
+	}
+
+}
